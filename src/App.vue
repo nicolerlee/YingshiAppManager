@@ -83,7 +83,8 @@
 import { Platform, Setting, Picture, Money, Tools, ArrowDown, Monitor, MagicStick } from '@element-plus/icons-vue'
 </script>
 
-<style>
+<style lang="less">
+@import "./common.less";
 .el-container {
   height: 100vh;
 }

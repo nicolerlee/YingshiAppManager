@@ -1,16 +1,32 @@
 <template>
-  <div>
-    <div class="vip-footer">
-      <div class="total">合计：<span class="total-price">¥{{ priceList[activeTab] }}</span></div>
-      <button class="pay-btn">立即支付</button>
-    </div>
-    <div class="vip-tip">
-      <i class="el-icon-warning"></i> 会员服务协议 <span class="divider">|</span> 自动续费协议
+  <div class="pay_board horizontal align_center">
+    <div class="flex1 horizontal align_center panel">
+      <div class="box1 vertical flex1">
+        <div class="horizontal align_center">
+          <div style="font-size: 26rpx; color: white;">合计：</div>
+          <div class="horizontal pay_price" style="align-items: baseline;">
+            ¥{{ priceList[activeTab] }}
+          </div>
+        </div>
+        <div class="horizontal protocol">
+          <div class="vertical center agree" :class="{ noAgree: !agree }">✓</div>
+          <div style="margin-left: 12rpx;">
+            <span class="agree_text word_nowrap">同意 </span>
+            <span>会员服务协议</span>
+          </div>
+        </div>
+      </div>
+      <div class="box2 relative">
+        <div class="vertical center submit_button">立即支付</div>
+      </div>
     </div>
   </div>
 </template>
 
+
 <script setup>
+import {ref} from "vue";
+
 const props = defineProps({
   priceList: {
     type: Array,
@@ -21,52 +37,65 @@ const props = defineProps({
     required: true
   }
 })
+const agree = ref(false)
 </script>
 
 <style lang="less" scoped>
-.vip-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0 0 0;
-  .total {
-    font-size: 16px;
-    color: #333;
-    .total-price {
-      color: #e67c1a;
-      font-weight: 600;
-      font-size: 20px;
-      margin-left: 2px;
+.pay_board {
+  height: 84px;
+  .panel {
+    background: #2E2E30;
+    border-radius: 8px;
+    .box1 {
+      margin-left: 14px;
+      padding: 4px 0 9px;
+      .pay_price {
+        color: #FF5E2D;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 33.5px;
+        .rmb {
+          font-size: 13px;
+          margin-right: 4px;
+        }
+      }
+      .protocol {
+        color: #ffffff80;
+        font-size: 10px;
+        margin-top: 0.5px;
+        align-items: flex-start;
+        .agree_text {
+          color: #ffffff80;
+        }
+        .agree {
+          width: 10px;
+          height: 10px;
+          min-width: 10px;
+          border-radius: 6px;
+          font-size: 9px;
+          line-height: 8px;
+          color: #ffffff80;
+          border: 0.5px solid #ffffff80;
+          margin-top: 2.5px;
+        }
+        .noAgree {
+          color: transparent;
+        }
+      }
     }
-  }
-  .pay-btn {
-    background: linear-gradient(90deg, #ffb43a 0%, #ff7c1a 100%);
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 8px 32px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(255, 180, 58, 0.15);
-    transition: background 0.2s;
-    &:hover {
-      background: linear-gradient(90deg, #ff7c1a 0%, #ffb43a 100%);
+    .box2 {
+      .submit_button {
+        height: 40px;
+        padding: 0 17px;
+        white-space: nowrap;
+        font-size: 17px;
+        border-radius: 20px;
+        margin-right: 12px;
+        background: #FF5E2D;
+        color: white;
+      }
     }
   }
 }
-.vip-tip {
-  font-size: 12px;
-  color: #bbb;
-  text-align: center;
-  margin: 10px 0 12px 0;
-  .divider {
-    margin: 0 6px;
-    color: #e0e0e0;
-  }
-  i {
-    color: #f5a623;
-    margin-right: 2px;
-  }
-}
-</style> 
+
+</style>
