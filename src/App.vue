@@ -30,6 +30,16 @@
           <el-icon><Money /></el-icon>
           <span>支付</span>
         </el-menu-item>
+        <el-sub-menu index="/pay-style">
+          <template #title>
+            <el-icon><MagicStick /></el-icon>
+            <span>编辑样式</span>
+          </template>
+          <el-menu-item index="/pay-style/pay">
+            <el-icon><Money /></el-icon>
+            支付样式
+          </el-menu-item>
+        </el-sub-menu>
         
         <el-menu-item index="/general-config">
           <el-icon><Tools /></el-icon>
@@ -70,7 +80,7 @@
 </template>
 
 <script setup>
-import { Platform, Setting, Picture, Money, Tools, ArrowDown, Monitor } from '@element-plus/icons-vue'
+import { Platform, Setting, Picture, Money, Tools, ArrowDown, Monitor, MagicStick } from '@element-plus/icons-vue'
 </script>
 
 <style>
