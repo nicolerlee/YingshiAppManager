@@ -26,7 +26,7 @@
 import { ref, computed } from 'vue'
 import { Paperclip } from '@element-plus/icons-vue'
 import Pay6 from './pay6/index.vue'
-import Pay66 from './pay66/index.vue'
+import Pay66 from './pay66/use/index.vue'
 
 const activeMenu = ref('biz6')
 

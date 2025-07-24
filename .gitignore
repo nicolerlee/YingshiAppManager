@@ -34,3 +34,6 @@ ammend.sh
 run.sh
 test.vue
 yarn.*
+
+*storybook.log
+storybook-static

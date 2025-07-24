@@ -5,7 +5,7 @@
         <div class="horizontal align_center">
           <div style="font-size: 26rpx; color: white;">合计：</div>
           <div class="horizontal pay_price" style="align-items: baseline;">
-            ¥{{ priceList[activeTab] }}
+            ¥{{ item.price }}
           </div>
         </div>
         <div class="horizontal protocol">
@@ -89,12 +89,8 @@ onMounted(async () => {
 });
 
 const props = defineProps({
-  priceList: {
-    type: Array,
-    required: true
-  },
-  activeTab: {
-    type: Number,
+  item: {
+    type: Object,
     required: true
   }
 })
