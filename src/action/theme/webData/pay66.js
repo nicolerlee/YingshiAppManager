@@ -1,4 +1,43 @@
-const mock66 = {
+const pay66 = {
+  config: [
+    {
+      "components" : {
+        "pay-board" : {
+          "style" : "1",
+          "id" : "1"
+        },
+        "plane-payment": {
+          "style" : "1",
+          "id" : "1"
+        }
+      }
+    },
+    {
+      "components" : {
+        "pay-board" : {
+          "style" : "2",
+          "id" : "1"
+        },
+        "plane-payment": {
+          "style" : "2",
+          "id" : "1"
+        }
+      },
+    },
+    {
+      "components" : {
+        "pay-board" : {
+          "style" : "1",
+          "id" : "1"
+        },
+        "plane-payment": {
+          "style" : "3",
+          "id" : "1"
+        }
+      },
+    },
+  ],
+
   less: {
     s1: `.container_bg { background: #F8F9FC; }
 .container {
@@ -394,44 +433,6 @@ const mock66 = {
 }
 .through { text-decoration: line-through; }`
   },
-  config: [
-    {
-      "components" : {
-        "pay-board" : {
-          "style" : "1",
-          "id" : "1"
-        },
-        "plane-payment": {
-          "style" : "1",
-          "id" : "1"
-        }
-      }
-    },
-    {
-      "components" : {
-        "pay-board" : {
-          "style" : "2",
-          "id" : "1"
-        },
-        "plane-payment": {
-          "style" : "2",
-          "id" : "1"
-        }
-      },
-    },
-    {
-      "components" : {
-        "pay-board" : {
-          "style" : "1",
-          "id" : "1"
-        },
-        "plane-payment": {
-          "style" : "3",
-          "id" : "1"
-        }
-      },
-    },
-  ],
 
   payBoardV1: {
     s1: `.pay_board {
@@ -545,9 +546,6 @@ const mock66 = {
   }
 }`,
   },
-}
+};
 
-
-export default {
-  mock66
-}
+export default pay66;

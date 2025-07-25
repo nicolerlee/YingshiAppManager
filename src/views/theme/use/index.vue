@@ -30,16 +30,25 @@ const configs = computed(() => useData().getConfig(props.root).items);
 const data = computed(() => useData().getData(props.root));
 
 onMounted(async () => {
+  // 先下载config.json
   await action.applyThemeConfig(props.root);
+  // 再下载子组件less， root组件(pay6/pay66)的less在对应的组件中触发下载
   const tempConfigs = useData().getConfig(props.root).items;
   console.log(tag, 'tempConfigs', tempConfigs)
+  // 遍历每一个root组件配置
   for (let i = 0; i < tempConfigs.length; i++) {
-    const tempConfig = tempConfigs[i];
-    action.applyComponentLess({
-      component: subComponents.payBoard, config: tempConfig.components, root: props.root
-    });
+    const tempConfig = tempConfigs[i]; const config = tempConfig.components;
+    Object.keys(config).forEach(name => {
+      if (!useConstant().isRootComponentName(name)) {
+        const component = useConstant().getSubComponentByName(name);
+        if (component.fake) {
+          console.error(tag, `无法下载less!!, don't support for component ${name}`);
+        } else {
+          action.applyComponentLess({ component, config, root: props.root });
+        }
+      }
+    })
   }
-
 });
 
 </script>

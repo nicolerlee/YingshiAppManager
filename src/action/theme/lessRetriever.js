@@ -1,24 +1,25 @@
-import mockData from "./mockData";
 import useConstant from "./useConstant";
 import {waitAsync} from "../../utils/common";
+import webData from './webData'
 
 const tag = 'lessRetriever>';
 
-const { mock66 } = mockData;
 const rootComponents = useConstant().rootComponents();
 const subComponents = useConstant().subComponents();
 
+const { pay66 } = webData();
+
 const lessRetriever = {
   downloadPlanePaymentLess(config) {
-    let lessCode = mock66.less.s4;
+    let lessCode = pay66.less.s4;
     if (config.style == 1) {
-      lessCode = mock66.less.s1;
+      lessCode = pay66.less.s1;
     }
     if (config.style == 2) {
-      lessCode = mock66.less.s2;
+      lessCode = pay66.less.s2;
     }
     if (config.style == 3) {
-      lessCode = mock66.less.s3;
+      lessCode = pay66.less.s3;
     }
     return lessCode;
     //return encloseLessClass(lessCode, `.pay66v${tid}`);
@@ -29,12 +30,12 @@ const lessRetriever = {
     const rootName = root.name; const { id, style } = itemConfig;
     if (rootName == rootComponents.pay66.name) {
       if (id == 1) {
-        if (style == 1) return mock66.payBoardV1.s1;
-        if (style == 2) return mock66.payBoardV1.s2;
-        if (style == 3) return mock66.payBoardV1.s3;
+        if (style == 1) return pay66.payBoardV1.s1;
+        if (style == 2) return pay66.payBoardV1.s2;
+        if (style == 3) return pay66.payBoardV1.s3;
       }
     }
-    return mock66.payBoardV1.s1;
+    return pay66.payBoardV1.s1;
   },
   downloadPrepare(component, config) {
     const { name } = component;

@@ -1,12 +1,12 @@
 import useConstant from "./useConstant";
-import mockData from "./mockData";
+import webData from './webData'
 import {waitAsync} from "../../utils/common";
 
 const tag = 'configRetriever>';
 
 const rootComponents = useConstant().rootComponents();
 
-const { mock66 } = mockData;
+const { pay66 } = webData();
 
 const configRetriever = {
   async downloadConfig(component) {
@@ -16,7 +16,7 @@ const configRetriever = {
     }
     const { name } = component;
     if (name == rootComponents.pay66.name) {
-      return mock66.config;
+      return pay66.config;
     }
     return [];
   }
