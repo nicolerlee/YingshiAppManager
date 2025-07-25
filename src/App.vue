@@ -160,7 +160,7 @@ import { Platform, Setting, Picture, Money, Tools, ArrowDown, Monitor, MagicStic
   color: #409eff; /* Active text color */
   border-left: 3px solid #409eff; /* Active indicator */
 }
-.pw { width: 300px; }
+.pw { width: 250px; }
 .ph { width: 400px; }
-.pay66 { width: 300px; height: 400px; position: relative; overflow-y: scroll; }
+.pay66 { width: 250px; height: 400px; position: relative; overflow-y: scroll; }
 </style> 

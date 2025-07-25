@@ -17,16 +17,21 @@
       </el-menu>
     </el-aside>
     <el-main>
-      <component :is="activeMenuComponent" />
+      <component :is="activeMenuComponent" :root="args.root"/>
     </el-main>
   </el-container>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import {ref, computed, reactive} from 'vue'
 import { Paperclip } from '@element-plus/icons-vue'
 import Pay6 from './pay6/index.vue'
-import Pay66 from './pay66/use/index.vue'
+import use from '../use/index.vue'
+import useThemeData from "../../../action/theme/useThemeData";
+import useConstant from "../../../action/theme/useConstant";
+
+const { action } = useThemeData();
+const rootComponents = useConstant().rootComponents();
 
 const activeMenu = ref('biz6')
 
@@ -34,9 +39,15 @@ function handleMenuSelect(index) {
   activeMenu.value = index
 }
 
+const args = computed(() => {
+  return {
+    root: rootComponents.pay66,
+  }
+});
+
 const activeMenuComponent = computed(() => {
   if (activeMenu.value === 'biz6') return Pay6
-  if (activeMenu.value === 'biz66') return Pay66
+  if (activeMenu.value === 'biz66') return use
   return null
 })
 </script>

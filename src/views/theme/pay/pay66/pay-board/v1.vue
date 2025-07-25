@@ -27,7 +27,7 @@
 <script setup>
 import {ref} from "vue";
 import { onMounted } from 'vue';
-import {convertRpxToPx} from "../../../../utils/common";
+import {convertRpxToPx} from "../../../../../utils/common";
 
 async function downloadLessFile(url) {
   try {
@@ -89,10 +89,7 @@ onMounted(async () => {
 });
 
 const props = defineProps({
-  item: {
-    type: Object,
-    required: true
-  }
+  item: { type: Object, required: true }
 })
 const agree = ref(false);
 </script>

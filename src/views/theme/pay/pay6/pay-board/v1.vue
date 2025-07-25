@@ -27,7 +27,7 @@
 <script setup>
 import {ref} from "vue";
 import { onMounted } from 'vue';
-import {convertRpxToPx} from "../../../../utils/common";
+import {convertRpxToPx} from "../../../../../utils/common";
 
 async function downloadLessFile(url) {
   try {

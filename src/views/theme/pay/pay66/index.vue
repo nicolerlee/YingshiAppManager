@@ -1,5 +1,5 @@
 <template>
-  <div class="vertical pay66" :class="'pay66v' + tid">
+  <div class="vertical pay66" :class="scopeClass">
     <div class="container container_bg vertical match_width box relative">
       <div class="match_width vertical relative">
         <div class="vertical match_width relative pw" style="position: absolute;">
@@ -73,9 +73,7 @@
       <div class="vertical">
         <div class="match_width vertical" style="position: absolute; z-index: 20; bottom: 0; background: #F8F9FC;">
           <div class="pay_box vertical padding box">
-            <PayBoardV3 v-if="payBoard.id == 3" :item="displayPayments.sel" />
-            <PayBoardV2 v-if="payBoard.id == 2" :item="displayPayments.sel" />
-            <PayBoardV1 v-else :item="displayPayments.sel" />
+            <component :is="getPayBoardComponent" :item="displayPayments.sel"/>
           </div>
         </div>
       </div>
@@ -89,7 +87,12 @@ import {computed, onMounted, reactive, ref} from "vue";
 import PayBoardV1 from './pay-board/v1.vue'
 import PayBoardV2 from './pay-board/v2.vue'
 import PayBoardV3 from './pay-board/v3.vue'
-import useThemeData from "../../../action/theme/useThemeData";
+import useThemeData from "../../../../action/theme/useThemeData";
+import useConstant from "../../../../action/theme/useConstant";
+
+const rootComponents = useConstant().rootComponents();
+const subComponents = useConstant().subComponents();
+
 const payItems = reactive([
   {
     key: '1',
@@ -170,21 +173,26 @@ const displayPayments = reactive({
 });
 
 const props = defineProps({
-  theme: { type: Object, required: true },
+  config: { type: Object, required: true },
   tid: { type: Number, required: true },
 });
 
 const { action } = useThemeData();
 
-const payBoard = computed(() => props.theme.components['pay-board']);
+const payBoard = computed(() => props.config.components[subComponents.payBoard.name]);
+const scopeClass = computed(() => `${rootComponents.pay66.name}-v${props.tid}`);
 
-console.error('pay theme components', props.theme.components, props.tid)
+// 计算属性，根据 payBoard.id 返回对应的组件
+const getPayBoardComponent = computed(() => {
+  const componentMap = {
+    3: PayBoardV3,
+    2: PayBoardV2,
+    default: PayBoardV1
+  };
+  return componentMap[payBoard.id] || componentMap.default;
+});
 
 onMounted(async () => {
-  const lessCode = await action.downloadComponentLess('plane-payment', props.theme.components, props.tid);
-  if (lessCode) action.applyLessCode(lessCode);
+  await action.applyComponentLess(rootComponents.pay66, props.config.components, props.tid);
 });
 </script>
-
-<style lang="less" scoped>
-</style>

@@ -65,7 +65,7 @@ const routes = [
   {
     path: '/pay-style/pay',
     name: 'PayTheme',
-    component: () => import('../views/pay-theme/index.vue'),
+    component: () => import('../views/theme/pay/index.vue'),
     meta: { title: '支付样式' }
   }
 ]
