@@ -27,23 +27,12 @@
 
 
 <script setup>
-import {computed, ref} from "vue";
-import useConstant from "../../../../../action/theme/useConstant";
-
-const subComponents = useConstant().subComponents();
+import {usePayBoard} from "../../../hooks/usePayBoard";
 
 const props = defineProps({
   item: { type: Object, required: true },
   config: { type: Object, required: true },
   root: { type: Object, required: true },
 })
-const myConfig = props.config.components[subComponents.payBoard.name];
-const scopeClass = ref(`${props.root.clz}-${subComponents.payBoard.clz}-v1${myConfig.style}`);
-console.log('payboard config', props.config, 'scopeClass', scopeClass)
-const agree = ref(false);
+const { myConfig, scopeClass, agree } = usePayBoard(props);
 </script>
-
-<style lang="less" scoped>
-
-
-</style>

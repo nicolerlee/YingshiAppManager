@@ -7,35 +7,30 @@ const tag = 'lessRetriever>';
 const rootComponents = useConstant().rootComponents();
 const subComponents = useConstant().subComponents();
 
-const { pay66 } = webData();
-
 const lessRetriever = {
-  downloadPlanePaymentLess(config) {
-    let lessCode = pay66.less.s4;
-    if (config.style == 1) {
-      lessCode = pay66.less.s1;
+  performDownloadRootLess(component, itemConfig) {
+    const dataMap = webData(); const { style } = itemConfig;
+    const rootData = dataMap[component.clz];
+    const componentData = rootData.root;
+    if (!componentData) {
+      console.error(tag, component, '不识别组件!!');
+      return '';
     }
-    if (config.style == 2) {
-      lessCode = pay66.less.s2;
-    }
-    if (config.style == 3) {
-      lessCode = pay66.less.s3;
-    }
-    return lessCode;
-    //return encloseLessClass(lessCode, `.pay66v${tid}`);
+    return componentData[`s${style}`];
   },
-  async downloadPayBoardLess(root, itemConfig) {
-    console.log(tag, '[sub] to download payboard in', root.name, itemConfig);
+  async performDownloadSubComponentLess(root, component, itemConfig) {
+    console.log(tag, `[sub] to download payboard${itemConfig.id}-${itemConfig.style} in`, root.name, itemConfig);
     //await waitAsync(1000);
     const rootName = root.name; const { id, style } = itemConfig;
-    if (rootName == rootComponents.pay66.name) {
-      if (id == 1) {
-        if (style == 1) return pay66.payBoardV1.s1;
-        if (style == 2) return pay66.payBoardV1.s2;
-        if (style == 3) return pay66.payBoardV1.s3;
-      }
+    const dataMap = webData();
+    const rootData = dataMap[root.clz];
+    const itemKey = `${component.name}-v${id}`;
+    const componentData = rootData[itemKey];
+    if (!componentData) {
+      console.error(tag, component, '不识别子组件!!');
+      return '';
     }
-    return pay66.payBoardV1.s1;
+    return componentData[`s${style}`];
   },
   downloadPrepare(component, config) {
     const { name } = component;
@@ -58,9 +53,7 @@ const lessRetriever = {
     if (!component.root) {
       console.error(tag, '子组件不走root下载less'); return;
     }
-    if (name == rootComponents.pay66.name) return await this.downloadPlanePaymentLess(config[name]);
-    console.error(tag, component, '不识别组件!!');
-    return '';
+    return this.performDownloadRootLess(component, config[name]);
   },
   async downloadSubComponentLess(root, component, config) {
     if (!root || !root.root) {
@@ -68,9 +61,7 @@ const lessRetriever = {
     }
     const { name } = component;
     if (!this.downloadPrepare(component, config)) return '';
-    if (name == subComponents.payBoard.name) return await this.downloadPayBoardLess(root, config[name]);
-    console.error(tag, component, '不识别子组件!!');
-    return '';
+    return this.performDownloadSubComponentLess(root, component, config[name]);
   },
 };
 

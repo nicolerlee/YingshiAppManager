@@ -91,6 +91,7 @@ import PayBoardV3 from './pay-board/v3.vue'
 import useThemeData from "../../../../action/theme/useThemeData";
 import useConstant from "../../../../action/theme/useConstant";
 
+const tag = 'pay66';
 const rootComponents = useConstant().rootComponents();
 const subComponents = useConstant().subComponents();
 
@@ -181,8 +182,10 @@ const props = defineProps({
 
 const { action } = useThemeData();
 
-const payBoard = computed(() => props.config.components[subComponents.payBoard.name]);
+const payBoard = reactive(props.config.components[subComponents.payBoard.name]);
 const scopeClass = computed(() => `${rootComponents.pay66.clz}-v${props.tid}`);
+
+console.error(tag, 'payBoard id', payBoard.id);
 
 // 计算属性，根据 payBoard.id 返回对应的组件
 const getPayBoardComponent = computed(() => {

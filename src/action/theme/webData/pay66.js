@@ -4,7 +4,7 @@ const pay66 = {
       "components" : {
         "pay-board" : {
           "style" : "1",
-          "id" : "1"
+          "id" : "3"
         },
         "plane-payment": {
           "style" : "1",
@@ -16,7 +16,7 @@ const pay66 = {
       "components" : {
         "pay-board" : {
           "style" : "2",
-          "id" : "1"
+          "id" : "3"
         },
         "plane-payment": {
           "style" : "2",
@@ -38,7 +38,7 @@ const pay66 = {
     },
   ],
 
-  less: {
+  root: {
     s1: `.container_bg { background: #F8F9FC; }
 .container {
   min-height: 100%;
@@ -434,7 +434,7 @@ const pay66 = {
 .through { text-decoration: line-through; }`
   },
 
-  payBoardV1: {
+  'pay-board-v1': {
     s1: `.pay_board {
   height: 168rpx;
   .panel {
@@ -546,6 +546,173 @@ const pay66 = {
   }
 }`,
   },
+  'pay-board-v2': {
+    s1: `.pay_board {
+  height: 104rpx;
+  .error {
+    font-size: 26rpx; line-height: 26rpx; color: white;
+    background: linear-gradient(270deg, #61605D 0%, #1E1E1E 100%); border-radius: 24rpx;
+  }
+  .left {
+    width: 60%; background: linear-gradient(270deg, #61605D 0%, #1E1E1E 100%); border-radius: 24rpx 0rpx 0rpx 24rpx;
+    padding-left: 28rpx;
+    .text1 {
+      font-size: 26rpx; line-height: 26rpx; color: white; margin-right: 13rpx;
+    }
+    .text2 {
+      font-size: 26rpx; line-height: 26rpx; color: #FFE3AC; font-weight: bold; margin-right: 8rpx;
+    }
+    .text3 {
+      font-size: 48rpx; line-height: 48rpx; color: #FFE3AC; font-weight: bold; margin-right: 8rpx;
+    }
+  }
+  .right {
+    width: 50%; top: 0; right: 0; background: linear-gradient(to right, #FFE2AB, #FFF1D5); border-radius: 24rpx;
+    color: #573327; font-size: 38rpx; font-weight: bold;
+    .button_gif {
+      overflow: hidden; border-radius: 24rpx;
+      .sweep_box {
+        animation: sweepMoveLTR 1s infinite;
+        .sweep1 { width: 40rpx; background: linear-gradient(45deg, #fff9ed00, #fff9edb3); height: 100%; margin-right: 20rpx; }
+        .sweep2 { width: 80rpx; background: linear-gradient(45deg, #fff9ed00, #fff9ede3); height: 100%; }
+      }
+    }
+  }
+}
+.check_board {
+  padding-top: 20rpx; padding-bottom: 68rpx; font-size: 22rpx; color: #00000066;
+  .check_box {
+    width: 24rpx; height: 24rpx; border-radius: 50%; border: solid 2rpx #00000030; margin-right: 12rpx;
+    .mark {
+      transform: rotate(-45deg); margin-bottom: 2rpx;
+      width: 16rpx; height: 8rpx; border-left: solid 2rpx #00000030; border-bottom: solid 2rpx #00000030;
+    }
+  }
+  .check_touch {
+    width: 150%; height: 200%; left: -50%;
+  }
+}
+@keyframes sweepMoveLTR {
+  0% {
+    transform: translateX(-100%) skewX(-30deg)
+  }
+  100% {
+    transform: translateX(250%) skewX(-30deg)
+  }
+}`,
+    s2: `.pay_board {
+  height: 104rpx;
+  .error {
+    font-size: 26rpx; line-height: 26rpx; color: white;
+    background: linear-gradient( 90deg, #38332E 0%, rgba(56,51,46,0.5) 100%); border-radius: 24rpx;
+  }
+  .left {
+    width: 60%; background: linear-gradient( 90deg, #38332E 0%, rgba(56,51,46,0.5) 100%); border-radius: 24rpx 0rpx 0rpx 24rpx;
+    padding-left: 28rpx;
+    .text1 {
+      font-size: 26rpx; line-height: 26rpx; color: white; margin-right: 13rpx;
+    }
+    .text2 {
+      font-size: 26rpx; line-height: 26rpx; color: #FFE3AC; font-weight: bold; margin-right: 8rpx;
+    }
+    .text3 {
+      font-size: 48rpx; line-height: 48rpx; color: #FFE3AC; font-weight: bold; margin-right: 8rpx;
+    }
+  }
+  .right {
+    width: 50%; top: 0; right: 0; background: linear-gradient(to right, #FFD292, #FFF0CD); border-radius: 24rpx;
+    color: #573327; font-size: 38rpx; font-weight: bold;
+    .button_gif {
+      overflow: hidden; border-radius: 24rpx;
+      .sweep_box {
+        animation: sweepMoveLTR 1s infinite;
+        .sweep1 { width: 40rpx; background: linear-gradient(45deg, #fff9ed00, #fff9edb3); height: 100%; margin-right: 20rpx; }
+        .sweep2 { width: 80rpx; background: linear-gradient(45deg, #fff9ed00, #fff9ede3); height: 100%; }
+      }
+    }
+  }
+}
+.check_board {
+  padding-top: 20rpx; padding-bottom: 68rpx; font-size: 22rpx; color: #FFFFFF66;
+  .check_box {
+    width: 24rpx; height: 24rpx; border-radius: 50%; border: solid 2rpx #FFFFFF30; margin-right: 12rpx;
+    .mark {
+      transform: rotate(-45deg); margin-bottom: 2rpx;
+      width: 16rpx; height: 8rpx; border-left: solid 2rpx #FFFFFF30; border-bottom: solid 2rpx #FFFFFF30;
+    }
+  }
+  .check_touch {
+    width: 150%; height: 200%; left: -50%;
+  }
+}
+@keyframes sweepMoveLTR {
+  0% {
+    transform: translateX(-100%) skewX(-30deg)
+  }
+  100% {
+    transform: translateX(250%) skewX(-30deg)
+  }
+}`
+  },
+  'pay-board-v3': {
+    s1: `.pay_board {
+  height: 96rpx; background: linear-gradient( 270deg, #FEE6C0 0%, #FFC8A5 100%), #732F06; border-radius: 100rpx;
+  .text1 { color: #671D00; font-size: 28rpx; line-height: 28rpx; margin-left: 6rpx; }
+
+  .text2 { color: #671D00; font-size: 42rpx; line-height: 42rpx; font-weight: bold; margin-left: 6rpx; }
+
+  .text3 { color: #671D00; font-size: 32rpx; line-height: 32rpx; margin-left: 12rpx; }
+
+}
+
+.pay_board.flick {
+  animation: flick-animation 0.4s infinite alternate ease-in;
+}
+.check_board {
+  padding-top: 20rpx; padding-bottom: 68rpx; font-size: 22rpx; color: #00000066;
+  .check_box {
+    width: 24rpx; height: 24rpx; border-radius: 50%; border: solid 4rpx #00000030; margin-right: 12rpx;
+    .mark {
+      transform: rotate(-45deg); margin-bottom: 2rpx;
+      width: 16rpx; height: 8rpx; border-left: solid 4rpx #00000030; border-bottom: solid 4rpx #00000030;
+    }
+  }
+  .check_touch {
+    width: 150%; height: 200%; left: -50%;
+  }
+}
+@keyframes flick-animation {
+  0% { transform: scale(1); }
+  100% { transform: scale(0.9); }
+}`,
+    s2: `.pay_board {
+  height: 96rpx; background: linear-gradient( 90deg, #FFE499 0%, #FFD1B6 50%, #FFA0A0 100%); border-radius: 100rpx;
+  .text1 { color: #671D00; font-size: 28rpx; line-height: 28rpx; margin-left: 6rpx; }
+  .text2 { color: #671D00; font-size: 42rpx; line-height: 42rpx; font-weight: bold; margin-left: 6rpx; }
+  .text3 { color: #671D00; font-size: 32rpx; line-height: 32rpx; margin-left: 12rpx; }
+}
+.pay_board.flick {
+  animation: flick-animation 0.4s infinite alternate ease-in;
+}
+.check_board {
+  padding-top: 20rpx; padding-bottom: 68rpx; font-size: 22rpx; color: #00000066;
+  .check_box {
+    width: 24rpx; height: 24rpx; border-radius: 50%; border: solid 4rpx #00000030; margin-right: 12rpx;
+    .mark {
+      transform: rotate(-45deg); margin-bottom: 2rpx;
+      width: 16rpx; height: 8rpx; border-left: solid 4rpx #00000030; border-bottom: solid 4rpx #00000030;
+    }
+  }
+  .check_touch {
+    width: 150%; height: 200%; left: -50%;
+  }
+}
+@keyframes flick-animation {
+  0% { transform: scale(1); }
+  100% { transform: scale(0.9); }
+}`
+  },
+
 };
 
 export default pay66;
