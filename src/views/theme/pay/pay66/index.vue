@@ -73,7 +73,8 @@
       <div class="vertical">
         <div class="match_width vertical" style="position: absolute; z-index: 20; bottom: 0; background: #F8F9FC;">
           <div class="pay_box vertical padding box">
-            <component :is="getPayBoardComponent" :item="displayPayments.sel"/>
+            <component :is="getPayBoardComponent" :item="displayPayments.sel"
+              :config="config" :root="root"/>
           </div>
         </div>
       </div>
@@ -174,13 +175,14 @@ const displayPayments = reactive({
 
 const props = defineProps({
   config: { type: Object, required: true },
+  root: { type: Object, required: true },
   tid: { type: Number, required: true },
 });
 
 const { action } = useThemeData();
 
 const payBoard = computed(() => props.config.components[subComponents.payBoard.name]);
-const scopeClass = computed(() => `${rootComponents.pay66.name}-v${props.tid}`);
+const scopeClass = computed(() => `${rootComponents.pay66.clz}-v${props.tid}`);
 
 // 计算属性，根据 payBoard.id 返回对应的组件
 const getPayBoardComponent = computed(() => {
@@ -193,6 +195,8 @@ const getPayBoardComponent = computed(() => {
 });
 
 onMounted(async () => {
-  await action.applyComponentLess(rootComponents.pay66, props.config.components, props.tid);
+  action.applyComponentLess({
+    component: rootComponents.pay66, config: props.config.components, tid: props.tid
+  });
 });
 </script>

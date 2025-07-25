@@ -399,7 +399,7 @@ const mock66 = {
       "components" : {
         "pay-board" : {
           "style" : "1",
-          "id" : "3"
+          "id" : "1"
         },
         "plane-payment": {
           "style" : "1",
@@ -410,8 +410,8 @@ const mock66 = {
     {
       "components" : {
         "pay-board" : {
-          "style" : "1",
-          "id" : "3"
+          "style" : "2",
+          "id" : "1"
         },
         "plane-payment": {
           "style" : "2",
@@ -423,7 +423,7 @@ const mock66 = {
       "components" : {
         "pay-board" : {
           "style" : "1",
-          "id" : "3"
+          "id" : "1"
         },
         "plane-payment": {
           "style" : "3",
@@ -432,6 +432,119 @@ const mock66 = {
       },
     },
   ],
+
+  payBoardV1: {
+    s1: `.pay_board {
+  height: 168rpx;
+  .panel {
+    background: #2E2E30; border-radius: 16rpx;
+    .box1 {
+      margin-left: 28rpx;padding: 8rpx 0 18rpx;
+      .pay_price {
+        color: #FF5E2D;
+        font-size: 48rpx; font-weight: bold; line-height: 67rpx;
+        .rmb { font-size: 26rpx; margin-right: 8rpx; }
+      }
+      .protocol {
+        color: #ffffff80;
+        font-size: 20rpx; margin-top: 1rpx; align-items: flex-start;
+        .agree_text { color: #ffffff80; }
+        .agree {
+          width: 20rpx; height: 20rpx; min-width: 20rpx; border-radius: 12rpx; font-size: 18rpx; line-height: 16rpx;
+          color: #ffffff80; border:1rpx solid #ffffff80; margin-top: 5rpx;
+        }
+        .noAgree { color: transparent; }
+      }
+    }
+    .box2 {
+      .submit_button {
+        height: 80rpx; padding: 0 34rpx; white-space: nowrap; font-size: 34rpx;
+        border-radius: 40rpx; margin-right: 24rpx;
+        background: #FF5E2D; color: white;
+      }
+    }
+  }
+}`,
+    s2: `.brandConfig() {
+  .panel() { background: #2E2E30; }
+  .pay_price() { color: #F83B29; }
+
+  .protocol() { color: #ffffff80; }
+
+  .agree() {}
+
+  .submit_button() { background: #DB3424; }
+}
+.brandConfig();
+.pay_board {
+  height: 168rpx;
+  .panel {
+    .panel(); border-radius: 16rpx;
+    .box1 {
+      margin-left: 28rpx;padding: 8rpx 0 18rpx;
+      .pay_price {
+        font-size: 48rpx; font-weight: bold; line-height: 67rpx; .pay_price();
+        .rmb { font-size: 26rpx; margin-right: 8rpx; }
+      }
+      .protocol {
+        font-size: 20rpx; margin-top: 1rpx; align-items: flex-start; .protocol();
+        .agree_text { color: #ffffff80; }
+        .agree {
+          width: 20rpx; height: 20rpx; min-width: 20rpx; border-radius: 12rpx; font-size: 18rpx; line-height: 16rpx;
+          color: #ffffff80; border:1rpx solid #ffffff80; margin-top: 5rpx; .agree();
+        }
+        .noAgree { color: transparent; }
+      }
+    }
+    .box2 {
+      .submit_button {
+        height: 80rpx; padding: 0 34rpx; white-space: nowrap; font-size: 34rpx;
+        border-radius: 40rpx; margin-right: 24rpx; .submit_button();
+      }
+    }
+  }
+}`,
+    s3: `.brandConfig() {
+  .panel() { background: #2E2E30; }
+  .pay_price() { color: #5DA2FB; }
+
+  .protocol() { color: #ffffff80; }
+
+  .agree() {}
+
+  .submit_button() { background: linear-gradient( 270deg, #57A9FC 0%, #8175F7 100%); color: #FFFFFF }
+
+}
+.brandConfig();
+.pay_board {
+  height: 168rpx;
+  .panel {
+    .panel(); border-radius: 16rpx;
+    .box1 {
+      margin-left: 28rpx;padding: 8rpx 0 18rpx;
+      .pay_price {
+        font-size: 48rpx; font-weight: bold; line-height: 67rpx; .pay_price();
+        .rmb { font-size: 26rpx; margin-right: 8rpx; }
+      }
+      .protocol {
+        font-size: 20rpx; margin-top: 1rpx; align-items: flex-start; .protocol();
+        .agree_text { color: #ffffff80; }
+        .agree {
+          width: 20rpx; height: 20rpx; min-width: 20rpx; border-radius: 12rpx; font-size: 18rpx; line-height: 16rpx;
+          color: #ffffff80; border:1rpx solid #ffffff80; margin-top: 5rpx; .agree();
+        }
+        .noAgree { color: transparent; }
+      }
+    }
+    .box2 {
+      .submit_button {
+        height: 80rpx; padding: 0 34rpx; white-space: nowrap; font-size: 34rpx;
+        border-radius: 40rpx; margin-right: 24rpx; .submit_button();
+      }
+    }
+  }
+}`,
+  },
 }
 
 

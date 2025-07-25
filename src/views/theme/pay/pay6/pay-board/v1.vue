@@ -77,7 +77,7 @@ async function downloadLessFile(url) {
 onMounted(async () => {
   const lessUrl = 'your-server-url/your-style.less'; // 替换为实际的 Less 文件 URL
   const lessCode = await downloadLessFile(lessUrl);
-  if (lessCode) {
+  if (false && lessCode) {
     const styleElement = document.createElement('style');
     styleElement.type = 'text/less';
     styleElement.textContent = lessCode;

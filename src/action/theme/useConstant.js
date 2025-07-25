@@ -1,11 +1,11 @@
 
 const themeRootComponent = {
-  pay66: { name: 'plane-payment' },
-  pay6: { name: 'pay-6' },
+  pay66: { name: 'plane-payment', clz: 'pay66' },
+  pay6: { name: 'pay6', clz: 'pay6' },
 };
 
 const themeSubComponent = {
-  payBoard: { name: 'pay-board' },
+  payBoard: { name: 'pay-board', clz: 'pb' },
 };
 
 const componentExtraInit = () => {

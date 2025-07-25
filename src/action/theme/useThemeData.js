@@ -32,15 +32,19 @@ const action = {
     window.less.refreshStyles();
   },
 
-  // 应用组件的样式， themeobj 为组件主题对象, tid为该组件的序号标识, tid的作用是生成唯一class 名
-  async applyComponentLess(component, themeObj, tid) {
-    const componentName = component.name;
-    const defaultTheme = { "style" : "1", "id" : "1" }; // 默认
-    let myTheme = defaultTheme; // 默认
-    if (themeObj && themeObj[componentName]) myTheme = themeObj[componentName];
-    if (!(myTheme.style && myTheme.id)) myTheme = defaultTheme;
-    let lessCode = lessRetriever.downloadComponentLess(component, themeObj);
-    lessCode = encloseLessClass(lessCode, `.${component.name}-v${tid}`);
+  // 应用组件的样式， config 为组件主题对象, tid为该组件的序号标识, tid的作用是生成唯一class 名
+  async applyComponentLess({ component, config, tid, root = {} }) {
+    const { name, clz } = component; const rootClz = root.clz;
+    const defaultConfig = { "style" : "1", "id" : "1" }; // 默认
+    let myConfig = defaultConfig; // 默认
+    if (config && config[name]) myConfig = config[name];
+    if (!(myConfig.style && myConfig.id)) myConfig = defaultConfig;
+    let lessCode = await lessRetriever.downloadComponentLess(root, component, config);
+    let wrapperClz;
+    if (component.root) wrapperClz = `.${clz}-v${tid}`;
+    else wrapperClz = `.${rootClz}-${clz}-v${myConfig.id}${myConfig.style}`;
+    lessCode = encloseLessClass(lessCode, wrapperClz);
+    //console.error(tag, `${name}, myconfig`, myConfig, 'clzz', wrapperClz);
     lessCode = convertRpxToPx(lessCode || '');
     this.applyLessCode(lessCode);
   },
