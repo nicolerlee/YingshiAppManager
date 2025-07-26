@@ -90,85 +90,13 @@ import PayBoardV2 from './pay-board/v2.vue'
 import PayBoardV3 from './pay-board/v3.vue'
 import useThemeData from "../../../../action/theme/useThemeData";
 import useConstant from "../../../../action/theme/useConstant";
+import useMockData from "../../hooks/useMockData";
 
 const tag = 'pay66';
 const rootComponents = useConstant().rootComponents();
 const subComponents = useConstant().subComponents();
 
-const payItems = reactive([
-  {
-    key: '1',
-    text1: '会员VIP',
-    text2: '0.01',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 0.01,
-  },
-  {
-    key: '2',
-    text1: '会员VIP',
-    text2: '0.1',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 0.1,
-  },
-  {
-    key: '3',
-    text1: '会员VIP',
-    text2: '1',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 1,
-  },
-  {
-    key: '4',
-    text1: '会员VIP',
-    text2: '1.99',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 1.99,
-  },
-  {
-    key: '5',
-    text1: '会员VIP',
-    text2: '0.01',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 2.00,
-  },
-  {
-    key: '6',
-    text1: '会员VIP',
-    text2: '0.01',
-    text3: {
-      text: '会员VIP',
-      lineThrough: true
-    },
-    text4: '会员VIP',
-    left_top_corner: '',
-    price: 0.01,
-  },
-]);
+const payItems = useMockData().pay66.payments;
 const displayPayments = reactive({
   items: payItems,
   sel: payItems[0],
@@ -189,11 +117,7 @@ console.error(tag, 'payBoard id', payBoard.id);
 
 // 计算属性，根据 payBoard.id 返回对应的组件
 const getPayBoardComponent = computed(() => {
-  const componentMap = {
-    3: PayBoardV3,
-    2: PayBoardV2,
-    default: PayBoardV1
-  };
+  const componentMap = { 3: PayBoardV3, 2: PayBoardV2, default: PayBoardV1 };
   return componentMap[payBoard.id] || componentMap.default;
 });
 

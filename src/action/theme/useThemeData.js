@@ -3,21 +3,19 @@ import lessRetriever from "./lessRetriever";
 import useData  from "./useData";
 import configRetriever from "./configRetriever";
 
-const tag = 'useThemeData>';
-
-const { pay66 } = useData();
-const themeModule66 = pay66;
-
 const action = {
-  getStyles() {
-    return themeModule66.config.items;
+  getStyles(root) {
+    return useData().getConfig(root).items;
   },
-  getSelectedStyle() {
-    return themeModule66.config.items[themeModule66.data.sel];
+  getSelectedStyle(root) {
+    const data = useData().getData(root);
+    const items = this.getStyles(root);
+    return items[data.sel];
   },
-  getStyleComponents() {
+  getStyleComponents(root) {
+    const items = this.getStyles(root);
     const components = [];
-    themeModule66.config.items.forEach((style) => {
+    items.forEach((style) => {
       components.push(style.components || {});
     });
     return components;
@@ -56,7 +54,6 @@ const action = {
 
 export default function () {
   return {
-    themeModule66,
     action
   };
 }

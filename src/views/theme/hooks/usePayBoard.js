@@ -1,5 +1,4 @@
-// usePayBoard.js
-import { ref, defineProps } from 'vue';
+import { ref } from 'vue';
 import useConstant from "../../../action/theme/useConstant";
 
 export function usePayBoard(props) {

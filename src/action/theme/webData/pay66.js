@@ -3,8 +3,8 @@ const pay66 = {
     {
       "components" : {
         "pay-board" : {
-          "style" : "1",
-          "id" : "3"
+          "style" : "3",
+          "id" : "1"
         },
         "plane-payment": {
           "style" : "1",
@@ -32,6 +32,18 @@ const pay66 = {
         },
         "plane-payment": {
           "style" : "3",
+          "id" : "1"
+        }
+      },
+    },
+    {
+      "components" : {
+        "pay-board" : {
+          "style" : "2",
+          "id" : "2"
+        },
+        "plane-payment": {
+          "style" : "2",
           "id" : "1"
         }
       },
@@ -434,8 +446,9 @@ const pay66 = {
 .through { text-decoration: line-through; }`
   },
 
-  'pay-board-v1': {
-    s1: `.pay_board {
+  'pay-board': {
+    v1: {
+      s1: `.pay_board {
   height: 168rpx;
   .panel {
     background: #2E2E30; border-radius: 16rpx;
@@ -466,7 +479,7 @@ const pay66 = {
     }
   }
 }`,
-    s2: `.brandConfig() {
+      s2: `.brandConfig() {
   .panel() { background: #2E2E30; }
   .pay_price() { color: #F83B29; }
 
@@ -505,7 +518,7 @@ const pay66 = {
     }
   }
 }`,
-    s3: `.brandConfig() {
+      s3: `.brandConfig() {
   .panel() { background: #2E2E30; }
   .pay_price() { color: #5DA2FB; }
 
@@ -545,9 +558,9 @@ const pay66 = {
     }
   }
 }`,
-  },
-  'pay-board-v2': {
-    s1: `.pay_board {
+    },
+    v2: {
+      s1: `.pay_board {
   height: 104rpx;
   .error {
     font-size: 26rpx; line-height: 26rpx; color: white;
@@ -600,7 +613,7 @@ const pay66 = {
     transform: translateX(250%) skewX(-30deg)
   }
 }`,
-    s2: `.pay_board {
+      s2: `.pay_board {
   height: 104rpx;
   .error {
     font-size: 26rpx; line-height: 26rpx; color: white;
@@ -653,9 +666,9 @@ const pay66 = {
     transform: translateX(250%) skewX(-30deg)
   }
 }`
-  },
-  'pay-board-v3': {
-    s1: `.pay_board {
+    },
+    v3: {
+      s1: `.pay_board {
   height: 96rpx; background: linear-gradient( 270deg, #FEE6C0 0%, #FFC8A5 100%), #732F06; border-radius: 100rpx;
   .text1 { color: #671D00; font-size: 28rpx; line-height: 28rpx; margin-left: 6rpx; }
 
@@ -685,7 +698,7 @@ const pay66 = {
   0% { transform: scale(1); }
   100% { transform: scale(0.9); }
 }`,
-    s2: `.pay_board {
+      s2: `.pay_board {
   height: 96rpx; background: linear-gradient( 90deg, #FFE499 0%, #FFD1B6 50%, #FFA0A0 100%); border-radius: 100rpx;
   .text1 { color: #671D00; font-size: 28rpx; line-height: 28rpx; margin-left: 6rpx; }
   .text2 { color: #671D00; font-size: 42rpx; line-height: 42rpx; font-weight: bold; margin-left: 6rpx; }
@@ -711,8 +724,8 @@ const pay66 = {
   0% { transform: scale(1); }
   100% { transform: scale(0.9); }
 }`
+    },
   },
-
 };
 
 export default pay66;

@@ -21,16 +21,21 @@ const lessRetriever = {
   async performDownloadSubComponentLess(root, component, itemConfig) {
     console.log(tag, `[sub] to download payboard${itemConfig.id}-${itemConfig.style} in`, root.name, itemConfig);
     //await waitAsync(1000);
-    const rootName = root.name; const { id, style } = itemConfig;
+    const { id, style } = itemConfig;
     const dataMap = webData();
     const rootData = dataMap[root.clz];
-    const itemKey = `${component.name}-v${id}`;
+    const itemKey = `${component.name}`;
     const componentData = rootData[itemKey];
     if (!componentData) {
       console.error(tag, component, '不识别子组件!!');
       return '';
     }
-    return componentData[`s${style}`];
+    const versionData = componentData[`v${id}`];
+    if (!versionData) {
+      console.error(tag, component, '无子组件的样式定义！！');
+      return '';
+    }
+    return versionData[`s${style}`] || '';
   },
   downloadPrepare(component, config) {
     const { name } = component;
