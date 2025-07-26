@@ -1,24 +1,20 @@
 import useConstant from "./useConstant";
 import webData from './webData'
 import {waitAsync} from "../../utils/common";
+import themeRequest from "./webData/themeRequest";
 
 const tag = 'configRetriever>';
 
-const rootComponents = useConstant().rootComponents();
-
-const { pay66 } = webData();
-
 const configRetriever = {
-  async downloadConfig(component) {
+  async downloadPreConfigs(component) {
     console.log(tag, 'downloadConfig', component);
     if (!component.root) {
       console.error(tag, '子组件不下载config.json!!'); return [];
     }
-    const { name } = component;
-    if (name == rootComponents.pay66.name) {
-      return pay66.config;
-    }
-    return [];
+    const dataMap = webData();
+    const rootData = dataMap[component.clz];
+    rootData.config = await themeRequest().getPreConfigs(component);
+    return rootData.config;
   }
 };
 

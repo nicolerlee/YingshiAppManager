@@ -31,7 +31,7 @@ const data = computed(() => useData().getData(props.root));
 
 onMounted(async () => {
   // 先下载config.json
-  await action.applyThemeConfig(props.root);
+  await action.applyPreThemeConfig(props.root);
   // 再下载子组件less， root组件(pay6/pay66)的less在对应的组件中触发下载
   const tempConfigs = useData().getConfig(props.root).items;
   console.log(tag, 'tempConfigs', tempConfigs)

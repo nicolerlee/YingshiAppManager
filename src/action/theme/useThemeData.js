@@ -46,8 +46,8 @@ const action = {
     lessCode = convertRpxToPx(lessCode || '');
     this.applyLessCode(lessCode);
   },
-  async applyThemeConfig(component) {
-    const configs = await configRetriever.downloadConfig(component);
+  async applyPreThemeConfig(component) {
+    const configs = await configRetriever.downloadPreConfigs(component);
     useData().updateConfig(component, configs);
   }
 };
