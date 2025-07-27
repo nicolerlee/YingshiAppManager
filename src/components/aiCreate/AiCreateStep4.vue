@@ -1,6 +1,6 @@
 <template>
   <div class="final-config-container">
-    <h4>步骤4: 核对所有配置数据并完成创建</h4>
+    <h4>步骤5: 核对所有配置数据并完成创建</h4>
     <div class="config-display-area">
       <div v-for="(block, name) in formattedConfigData" :key="name" class="config-block">
         <h5>{{ blockTitles[name] || name }}</h5>

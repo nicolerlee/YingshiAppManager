@@ -49,6 +49,10 @@ const action = {
   async applyPreThemeConfig(component) {
     const configs = await configRetriever.downloadPreConfigs(component);
     useData().updateConfig(component, configs);
+  },
+  async applyAppliedThemeConfig(component) {
+    const configs = await configRetriever.downloadAppliedConfigs(component);
+    useData().updateConfig(component, configs);
   }
 };
 

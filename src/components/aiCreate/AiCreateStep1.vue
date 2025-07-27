@@ -133,7 +133,7 @@ const formRules = {
   platform: [{ required: true, message: 'Please select platform', trigger: 'change' }],
   version: [{ required: true, message: 'Please input version', trigger: 'blur' }],
   appCode: [{ required: true, message: 'Please input app code', trigger: 'blur' }],
-  product: [{ required: true, message: 'Please input product line', trigger: 'blur' }],
+  product: [{ required: true, message: 'Please input 小程序代码唯一标识(brand)', trigger: 'blur' }],
   customer: [{ required: true, message: 'Please input customer identifier', trigger: 'blur' }],
   appid: [{ required: true, message: 'Please input AppID', trigger: 'blur' }],
   token_id: [{ required: true, message: 'Please input Token ID', trigger: 'blur' }],

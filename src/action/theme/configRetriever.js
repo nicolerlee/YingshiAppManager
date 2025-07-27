@@ -15,6 +15,16 @@ const configRetriever = {
     const rootData = dataMap[component.clz];
     rootData.config = await themeRequest().getPreConfigs(component);
     return rootData.config;
+  },
+  async downloadAppliedConfigs(component) {
+    console.log(tag, 'downloadConfig', component);
+    if (!component.root) {
+      console.error(tag, '子组件不下载config.json!!'); return [];
+    }
+    const dataMap = webData();
+    const rootData = dataMap[component.clz];
+    rootData.config = await themeRequest().getAppliedConfigs(component);
+    return rootData.config;
   }
 };
 

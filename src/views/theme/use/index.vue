@@ -1,9 +1,6 @@
 <template>
   <div class="vertical">
     <display-items :configs="configs" :root="root"></display-items>
-    <div class="vertical match_width align_center">
-      <el-button class="submit_button" type="primary" @click="">提交{{data.sel}}</el-button>
-    </div>
   </div>
 </template>
 
@@ -12,7 +9,7 @@ import DisplayItems from "./display_items.vue";
 import useThemeData from "../../../action/theme/useThemeData";
 import useConstant from "../../../action/theme/useConstant";
 import useData  from "../../../action/theme/useData";
-import {computed, onMounted, reactive} from "vue";
+import {computed, onMounted, reactive, watch} from "vue";
 
 const tag = 'use>';
 
@@ -22,16 +19,31 @@ const { action } = useThemeData();
 
 const props = defineProps({
   root: { type: Object, required: true },
+  mode: { type: String, default: "preset" },
 });
 
 console.log(tag, 'root', props.root);
 
 const configs = computed(() => useData().getConfig(props.root).items);
 const data = computed(() => useData().getData(props.root));
+const emit = defineEmits(['event']);
+
+// 监听 data.sel 的变化，初始值也触发回调
+watch(
+    () => data.value.sel,
+    (newVal, oldVal) => {
+      console.log(`${tag} data.sel 发生变化，旧值: ${oldVal}，新值: ${newVal}`);
+      // 在这里可以添加其他逻辑
+      emit('event', 'selected', data);
+    },
+);
 
 onMounted(async () => {
   // 先下载config.json
-  await action.applyPreThemeConfig(props.root);
+  if (props.mode == "preset") {
+    await action.applyPreThemeConfig(props.root);
+  } else {
+  }
   // 再下载子组件less， root组件(pay6/pay66)的less在对应的组件中触发下载
   const tempConfigs = useData().getConfig(props.root).items;
   console.log(tag, 'tempConfigs', tempConfigs)
@@ -49,6 +61,7 @@ onMounted(async () => {
       }
     })
   }
+  emit('event', 'selected', data);
 });
 
 </script>

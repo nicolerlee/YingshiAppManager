@@ -41,8 +41,16 @@
             />
           </div>
 
-          <!-- 步骤4: 展示配置数据并确认 -->
+          <!-- 步骤4: 主题 -->
           <div v-if="currentStep === 3">
+            <AiCreateThemeStep
+                :current-sub-step="currentSubStep"
+                @update:current-sub-step="currentSubStep = $event"
+                ref="themeFormRef"/>
+          </div>
+
+          <!-- 步骤4: 展示配置数据并确认 -->
+          <div v-if="currentStep === 4">
             <AiCreateStep4
               :basicInfoForm="basicInfoForm"
               :microConfigForm="step2ConfigForm.microConfig"
@@ -57,9 +65,9 @@
 
         <!-- 导航按钮 -->
         <div class="step-actions">
-          <el-button v-if="currentStep > 0 || currentSubStep > 0 && currentStep !== 3" @click="prevStep">上一步</el-button>
-          <el-button v-if="currentStep < 3" type="primary" @click="nextStep">下一步</el-button>
-          <el-button v-if="currentStep === 3" type="primary" @click="startGeneration">确认无误，开始生成小程序</el-button>
+          <el-button v-if="currentStep > 0 || currentSubStep > 0 && currentStep !== 4" @click="prevStep">上一步</el-button>
+          <el-button v-if="currentStep < 4" type="primary" @click="nextStep">下一步</el-button>
+          <el-button v-if="currentStep === 4" type="primary" @click="startGeneration">确认无误，开始生成小程序</el-button>
         </div>
       </div>
     </el-card>
@@ -74,9 +82,12 @@ import AiCreateStep1 from '../components/aiCreate/AiCreateStep1.vue'
 import AiCreateStep3 from '../components/aiCreate/AiCreateStep3.vue'
 import AiCreateStep4 from '../components/aiCreate/AiCreateStep4.vue'
 import AiCreateStep2 from '../components/aiCreate/AiCreateStep2.vue'
+import AiCreateThemeStep from '../components/aiCreate/AiCreateThemeStep.vue'
 import { useRouter } from 'vue-router'
 import { useAppGenerationStore } from '../stores/appGenerationStore'
 import request from '../utils/request'
+import useData from "@/action/aiCreate/useData/index.js";
+import appConfig from "@/appConfig/index.js";
 
 const router = useRouter()
 const currentStep = ref(0)
@@ -87,37 +98,9 @@ const appGenerationStore = useAppGenerationStore()
 const basicInfoStepRef = ref(null)
 const generalConfigFormRef = ref(null)
 const aiCreateStep2Ref = ref(null)
+const themeFormRef = ref(null)
 
-// 表单校验规则
-const basicInfoFormRules = reactive({
-  appName: [{ required: true, message: 'Please input app name', trigger: 'blur' }],
-  platform: [{ required: true, message: 'Please select platform', trigger: 'change' }],
-  version: [{ required: true, message: 'Please input version', trigger: 'blur' }],
-  appCode: [{ required: true, message: 'Please input app code', trigger: 'blur' }],
-  product: [{ required: true, message: 'Please input product line', trigger: 'blur' }],
-  customer: [{ required: true, message: 'Please input customer identifier', trigger: 'blur' }],
-  appid: [{ required: true, message: 'Please input AppID', trigger: 'blur' }],
-  token_id: [{ required: true, message: 'Please input Token ID', trigger: 'blur' }],
-  cl: [{ required: true, message: 'Please input CL identifier', trigger: 'blur' }],
-  mainTheme: [],
-  secondTheme: [],
-})
-
-const step2ConfigForm = ref({
-  microConfig: { deliverId: '', bannerId: '' },
-  paymentConfig: {
-    normalPay: { enabled: false, gatewayAndroid: '', gatewayIos: '' },
-    orderPay: { enabled: false, gatewayAndroid: '', gatewayIos: '' },
-    renewPay: { enabled: false, gatewayAndroid: '', gatewayIos: '' },
-    douzuanPay: { enabled: false, gatewayAndroid: '', gatewayIos: '' },
-    wxVirtualPay: { enabled: false, gatewayAndroid: '', gatewayIos: '' },
-  },
-  adConfig: {
-    rewardAd: { enabled: false, rewardAdId: '', rewardCount: null },
-    interstitialAd: { enabled: false, interstitialAdId: '', interstitialCount: null },
-    nativeAd: { enabled: false, nativeAdId: '' },
-  },
-});
+const step2ConfigForm = useData().step2ConfigForm;
 
 const stepsData = ref([
   {
@@ -133,6 +116,10 @@ const stepsData = ref([
     description: '配置其他通用设置'
   },
   {
+    title: '样式主题',
+    description: '配置样式主题设置'
+  },
+  {
     title: '展示配置数据并确认',
     description: '核对所有配置数据并完成创建'
   }
@@ -144,35 +131,9 @@ const handleStepClick = (index) => {
 }
 
 // 表单数据模型
-const basicInfoForm = ref({
-  appName: '',
-  platform: '',
-  version: '',
-  appCode: '',
-  product: '',
-  customer: '',
-  appid: '',
-  token_id: null,
-  cl: '',
-  mainTheme: '',
-  secondTheme: '',
-})
+const basicInfoForm = useData().basicInfoForm;
 
-const generalConfigForm = ref({
-  contact: '',
-  payCardStyle: null,
-  homeCardStyle: null,
-  buildCode: '',
-  mineLoginType: 'anonymousLogin',
-  readerLoginType: 'anonymousLogin',
-  douyinImId: '',
-  douyinAppToken: '',
-  weixinAppToken: '',
-  kuaishouClientId: '',
-  kuaishouClientSecret: '',
-  kuaishouAppToken: '',
-  iaaMode: false,
-})
+const generalConfigForm = useData().generalConfigForm;
 
 const resetWizard = () => {
   currentStep.value = 0;
@@ -180,6 +141,7 @@ const resetWizard = () => {
   basicInfoStepRef.value?.resetFields();
   aiCreateStep2Ref.value?.resetFields();
   generalConfigFormRef.value?.resetFields();
+  themeFormRef.value.resetVars();
 };
 
 // 导航函数
@@ -192,6 +154,7 @@ const nextStep = async () => {
         ElMessage.error('Please fill in the complete "Basic Info"');
         return;
       }
+      appConfig.brand = basicInfoForm.value.product;
       currentSubStep.value = 1;
       return;
     } else if (currentSubStep.value === 1) {
@@ -259,6 +222,12 @@ const nextStep = async () => {
     currentStep.value++;
     currentSubStep.value = 0;
     return;
+  } else if (currentStep.value === 3) {
+    const valid = await themeFormRef.value.validate().catch(() => false);
+    if (!valid) {
+      ElMessage.error('Please choose one theme"');
+      return;
+    }
   }
 
   if (currentStep.value < stepsData.value.length - 1) {
@@ -290,6 +259,10 @@ const prevStep = () => {
     currentStep.value--;
     currentSubStep.value = 0;
     return;
+  } else if (currentStep.value === 4) {
+    currentStep.value--;
+    currentSubStep.value = 0;
+    return;
   }
 
   if (currentStep.value > 0) {
@@ -299,13 +272,16 @@ const prevStep = () => {
 };
 
 const startGeneration = async () => {
+  let themeSubmitData = useData().buildThemeConfigSubmitParam();
+  console.error('asasasasa>', 'buildThemeConfigSubmitParam', themeSubmitData);
   // 收集所有配置数据
   const params = {
     baseConfig: basicInfoForm.value,
     deliverConfig: step2ConfigForm.value.microConfig,
     paymentConfig: step2ConfigForm.value.paymentConfig,
     adConfig: step2ConfigForm.value.adConfig,
-    commonConfig: generalConfigForm.value
+    commonConfig: generalConfigForm.value,
+    themeConfig: themeSubmitData,
   };
 
   try {

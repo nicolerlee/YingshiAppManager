@@ -1,5 +1,5 @@
 const appConfig = {
-  brand: 'fun',
+  brand: '',
 };
 
 export default appConfig;
