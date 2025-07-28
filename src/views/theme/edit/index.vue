@@ -2,22 +2,23 @@
   <el-container style="height: 100%; min-height: 400px;">
     <el-aside width="180px">
       <el-menu :default-active="activeMenu" @select="handleMenuSelect" class="el-menu-vertical">
-        <el-menu-item index="biz6">
+        <el-menu-item index="pay6">
           业务6
-          <template v-if="activeMenu === 'biz6'">
+          <template v-if="activeMenu === 'pay6'">
             <el-icon style="margin-left: 8px;"><Paperclip /></el-icon>
           </template>
         </el-menu-item>
-        <el-menu-item index="biz66">
+        <el-menu-item index="pay66">
           业务66
-          <template v-if="activeMenu === 'biz66'">
+          <template v-if="activeMenu === 'pay66'">
             <el-icon style="margin-left: 8px;"><Paperclip /></el-icon>
           </template>
         </el-menu-item>
       </el-menu>
     </el-aside>
     <el-main>
-      <component :is="activeMenuComponent" :root="args.root"/>
+      <choose :choose="activeMenu"></choose>
+      <div>{{display.stepText}}{{display.title}}</div>
     </el-main>
   </el-container>
 </template>
@@ -25,31 +26,31 @@
 <script setup>
 import {ref, computed, reactive} from 'vue'
 import { Paperclip } from '@element-plus/icons-vue'
-import Pay6 from './pay6/index.vue'
-import use from '../use/index.vue'
-import useThemeData from "../../../action/theme/useThemeData";
-import useConstant from "../../../action/theme/useConstant";
+import choose from './choose.vue'
 
-const { action } = useThemeData();
-const rootComponents = useConstant().rootComponents();
+const activeMenu = ref('pay66');
+const editData = reactive({
+  step: 0,
+  steps: [
+    {
+      title: '应用中样式',
+    },
+      {
+      title: '编辑样式',
+    },
+  ]
+});
 
-const activeMenu = ref('biz6')
+const display = computed(() => {
+  return {
+    stepText: `${editData.step + 1}/${editData.steps.length}`,
+    title: editData.steps[editData.step].title,
+  }
+})
 
 function handleMenuSelect(index) {
   activeMenu.value = index
 }
-
-const args = computed(() => {
-  return {
-    root: rootComponents.pay66,
-  }
-});
-
-const activeMenuComponent = computed(() => {
-  if (activeMenu.value === 'biz6') return Pay6
-  if (activeMenu.value === 'biz66') return use
-  return null
-})
 </script>
 
 <style scoped>

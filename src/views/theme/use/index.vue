@@ -43,6 +43,7 @@ onMounted(async () => {
   if (props.mode == "preset") {
     await action.applyPreThemeConfig(props.root);
   } else {
+    await action.applyAppliedThemeConfig(props.root);
   }
   // 再下载子组件less， root组件(pay6/pay66)的less在对应的组件中触发下载
   const tempConfigs = useData().getConfig(props.root).items;

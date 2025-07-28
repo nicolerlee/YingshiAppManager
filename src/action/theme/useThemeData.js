@@ -51,7 +51,7 @@ const action = {
     useData().updateConfig(component, configs);
   },
   async applyAppliedThemeConfig(component) {
-    const configs = await configRetriever.downloadAppliedConfigs(component);
+    const configs = [await configRetriever.downloadAppliedConfigs(component)];
     useData().updateConfig(component, configs);
   }
 };

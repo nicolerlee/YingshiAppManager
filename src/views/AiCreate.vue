@@ -152,9 +152,11 @@ const nextStep = async () => {
       const valid = await basicInfoStepRef.value.validate().catch(() => false);
       if (!valid) {
         ElMessage.error('Please fill in the complete "Basic Info"');
+        appConfig.brand = ''; appConfig.brandName = '';
         return;
       }
       appConfig.brand = basicInfoForm.value.product;
+      appConfig.brandName = basicInfoForm.value.appName;
       currentSubStep.value = 1;
       return;
     } else if (currentSubStep.value === 1) {
@@ -288,6 +290,7 @@ const startGeneration = async () => {
     const res = await request.post('/api/novel-create/createNovelApp', params);
     if (!res || res.code !== 200 || !res.data?.taskId) {
       ElMessage.error(res.message || '创建任务失败');
+      appConfig.brand = ''; appConfig.brandName = '';
       return;
     }
     // 将配置数据存储到 Pinia store（如后续页面还需用到）

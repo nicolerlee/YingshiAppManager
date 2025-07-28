@@ -109,7 +109,6 @@ const props = defineProps({
 });
 
 const { action } = useThemeData();
-
 const payBoard = reactive(props.config.components[subComponents.payBoard.name]);
 const scopeClass = computed(() => `${rootComponents.pay66.clz}-v${props.tid}`);
 
