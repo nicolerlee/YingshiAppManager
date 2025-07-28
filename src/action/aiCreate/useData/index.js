@@ -79,6 +79,21 @@ const buildThemeConfigSubmitParam = () => {
     const item = { components, name: key };
     roots.push(item);
   })
+  roots.push({
+    name: 'pay6',
+    components: [
+      {
+        name: 'pay-board',
+        id: '1',
+        style: '1'
+      },
+      {
+        name: 'good-item',
+        id: '1',
+        style: '1'
+      }
+    ]
+  })
   return roots;
 }
 
