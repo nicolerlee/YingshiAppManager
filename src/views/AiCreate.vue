@@ -225,6 +225,10 @@ const nextStep = async () => {
     currentSubStep.value = 0;
     return;
   } else if (currentStep.value === 3) {
+    if (themeFormRef.value.hasNext()) {
+      currentSubStep.value += 1;
+      return;
+    }
     const valid = await themeFormRef.value.validate().catch(() => false);
     if (!valid) {
       ElMessage.error('Please choose one theme"');
@@ -300,6 +304,7 @@ const startGeneration = async () => {
       name: 'generate-app',
       query: { taskId: res.data.taskId }
     });
+    themeFormRef.value.resetVars();
   } catch (e) {
     // ElMessage.error(e.message || '请求失败');
   }

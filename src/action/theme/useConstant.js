@@ -6,6 +6,7 @@ const themeRootComponent = {
 
 const themeSubComponent = {
   payBoard: { name: 'pay-board', clz: 'pb' },
+  goodItem: { name: 'good-item', clz: 'gi' },
 };
 
 const componentExtraInit = () => {

@@ -6,6 +6,9 @@ const pay6 = reactive({
   },
   data: {
     sel: 0,
+  },
+  reset() {
+    this.data.sel = 0;
   }
 });
 

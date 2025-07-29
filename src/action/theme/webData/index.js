@@ -1,4 +1,5 @@
-import pay66 from "./pay66";
+import pay66 from "@/action/theme/webData/pay66.js";
+import pay6 from "@/action/theme/webData/pay6.js";
 
 // 根组件的主题配置信息存储在以组件的key为名的js文件中，例如pay66.js, pay6.js
 
@@ -21,6 +22,6 @@ const pay66 = {
 
 export default function () {
   return {
-    pay66,
+    pay66, pay6
   };
 }

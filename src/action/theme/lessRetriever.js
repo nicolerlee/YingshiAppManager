@@ -21,7 +21,7 @@ const lessRetriever = {
     return componentData[`s${style}`];
   },
   async performDownloadSubComponentLess(root, component, itemConfig) {
-    console.log(tag, `[sub] to download payboard${itemConfig.id}-${itemConfig.style} in`, root.name, itemConfig);
+    console.log(tag, `[sub] to download payboard${itemConfig.id}-${itemConfig.style} in ${root.name} finished`, itemConfig);
     //await waitAsync(1000);
     const { id, style } = itemConfig;
     const dataMap = webData();
@@ -32,12 +32,10 @@ const lessRetriever = {
       console.error(tag, component, '不识别子组件!!');
       return '';
     }
+    if (!componentData[`v${id}`]) componentData[`v${id}`] = {};
     const versionData = componentData[`v${id}`];
-    if (!versionData) {
-      console.error(tag, component, '无子组件的样式定义！！');
-      return '';
-    }
     versionData[`s${style}`] = await themeRequest().getSubLess(root, component, itemConfig);
+    console.log(tag, `[sub] download ${component.name} ${itemConfig.id}-${itemConfig.style} in ${root.name} finished`, itemConfig);
     return versionData[`s${style}`] || '';
   },
   downloadPrepare(component, config) {

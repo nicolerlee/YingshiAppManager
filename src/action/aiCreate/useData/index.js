@@ -1,21 +1,11 @@
 import {reactive, ref} from "vue";
 
 const themeForm = reactive({
-  configItems: ['pay66'],
   pay66: {
     chosen: false,
-    config: {
-      "components" : {
-        "pay-board" : {
-          "style" : "3",
-          "id" : "1"
-        },
-        "plane-payment": {
-          "style" : "1",
-          "id" : "1"
-        }
-      }
-    }
+  },
+  pay6: {
+    chosen: false,
   }
 });
 
@@ -68,31 +58,9 @@ const generalConfigForm = ref({
 
 const buildThemeConfigSubmitParam = () => {
   const roots = [];
-  themeForm.configItems.forEach(key => {
-    const components = [];
-    const root = themeForm[key];
-    const tempSubs = root.config.components;
-    Object.keys(tempSubs).forEach(subkey => {
-      const subValue = tempSubs[subkey];
-      components.push({ name: subkey, id: subValue.id, style: subValue.style });
-    })
-    const item = { components, name: key };
-    roots.push(item);
-  })
-  roots.push({
-    name: 'pay6',
-    components: [
-      {
-        name: 'pay-board',
-        id: '1',
-        style: '1'
-      },
-      {
-        name: 'good-item',
-        id: '1',
-        style: '1'
-      }
-    ]
+  Object.keys(themeForm).forEach(key => {
+    const component = themeForm[key];
+    roots.push({ node: component.node, version: component.version });
   })
   return roots;
 }

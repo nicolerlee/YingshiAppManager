@@ -18,7 +18,6 @@
     </el-aside>
     <el-main>
       <choose :choose="activeMenu"></choose>
-      <div>{{display.stepText}}{{display.title}}</div>
     </el-main>
   </el-container>
 </template>
@@ -27,26 +26,11 @@
 import {ref, computed, reactive} from 'vue'
 import { Paperclip } from '@element-plus/icons-vue'
 import choose from './choose.vue'
+import appConfig from "@/appConfig/index.js";
+
+appConfig.brand = 'fun';
 
 const activeMenu = ref('pay66');
-const editData = reactive({
-  step: 0,
-  steps: [
-    {
-      title: '应用中样式',
-    },
-      {
-      title: '编辑样式',
-    },
-  ]
-});
-
-const display = computed(() => {
-  return {
-    stepText: `${editData.step + 1}/${editData.steps.length}`,
-    title: editData.steps[editData.step].title,
-  }
-})
 
 function handleMenuSelect(index) {
   activeMenu.value = index

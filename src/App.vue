@@ -59,7 +59,6 @@
           <h2>文曲-小说小程序创作中心</h2>
           <!-- <h4>让需求流动更简单</h4> -->
           <div class="horizontal right-header">
-            <el-tag class="access-item" :type="display.appName.icon" @click="handleSwitchAppClick">{{display.appName.text}}</el-tag>
             <el-dropdown>
             <span class="admin-info">
               管理员 <el-icon><ArrowDown /></el-icon>
@@ -77,10 +76,6 @@
 
       <el-main>
         <router-view></router-view>
-        <SwitchAppDialog v-if="switchAppConfigData.show"
-                         :switchAppConfigData="switchAppConfigData"
-                         @updateAppConfig="updateAppConfig"
-        ></SwitchAppDialog>
       </el-main>
     </el-container>
   </el-container>
@@ -91,29 +86,6 @@ import { Platform, Setting, Picture, Money, Tools, ArrowDown, Monitor, MagicStic
 
 import appConfig from "@/appConfig/index.js";
 import {computed, reactive} from "vue";
-import SwitchAppDialog from "@/views/app/SwitchAppDialog.vue";
-
-const display = computed(() => {
-  return {
-    appName: {
-      text: appConfig.brandName ? appConfig.brandName : '未选择小程序',
-      icon: appConfig.brandName ? '' : 'warning',
-    }
-  };
-});
-
-const switchAppConfigData = reactive({
-  show: false,
-})
-
-const handleSwitchAppClick = () => {
-  switchAppConfigData.show = true;
-};
-
-const updateAppConfig = (data) => {
-  appConfig.brand = data.brand
-  appConfig.brandName = data.brandName
-}
 
 </script>
 
@@ -132,11 +104,6 @@ const updateAppConfig = (data) => {
 
 &::-webkit-scrollbar-track {
   background: #f1f1f1 !important;
-}
-.right-header {
-  .access-item {
-    margin: 0 10px; background: transparent; border: none;
-  }
 }
 .el-container {
   height: 100vh;
@@ -202,4 +169,5 @@ const updateAppConfig = (data) => {
 .pw { width: 250px; }
 .ph { width: 400px; }
 .pay66 { width: 250px; height: 400px; position: relative; overflow-y: scroll; }
+.pay6 { width: 250px; height: 400px; position: relative; overflow-y: scroll; }
 </style> 

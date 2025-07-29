@@ -6,6 +6,10 @@ const urls = {
   getAppliedConfig: '/api/theme/component/config',
   getRootLess: '/api/theme/component/less',
   getSubLess: '/api/theme/component/less/sub',
+
+  applyRootPreset: '/api/theme/component/apply-root-preset',
+  applySubPreset: '/api/theme/component/apply-sub-preset',
+  getPresets: '/api/theme/component/presets',
 }
 
 
@@ -58,6 +62,42 @@ const getSubLess = async (root, component, config)  => {
   return '';
 };
 
+const applyRootPreset = async (brand, node, version) => {
+  const res = await request.get(urls.applyRootPreset, {
+    params: { brand, node, version },
+  });
+  console.log('applyRootPreset', root, res);
+  if (res.code === 200) {
+    return res.data;
+  }
+  console.error('applyRootPreset failed', res);
+  return '';
+};
+
+const applySubPreset = async (root, component) => {
+  const res = await request.post(urls.applyRootPreset, {
+    params: { brand: appConfig.brand, node: root.sourceNode, version: root.version }
+  });
+  console.log('applyRootPreset', root);
+  if (res.code == 200) {
+    return res.data;
+  }
+  console.error('applyRootPreset failed', res);
+  return '';
+};
+
+const getPresets = async (brand, node, version) => {
+  const res = await request.get(urls.getPresets, {
+    params: { brand },
+  });
+  console.log('getPresets', root, res);
+  if (res.code === 200) {
+    return res.data;
+  }
+  console.error('getPresets failed', res);
+  return '';
+};
+
 
 export default function () {
   return {
@@ -65,5 +105,6 @@ export default function () {
     getAppliedConfigs,
     getRootLess,
     getSubLess,
+    applyRootPreset,
   }
 }
